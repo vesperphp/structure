@@ -21,6 +21,7 @@ class Debug{
         echo "<pre>";
 
         var_dump($a);
+        Log::to($a, 'debug');
 
         echo "</pre>";
 

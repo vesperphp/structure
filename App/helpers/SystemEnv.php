@@ -10,14 +10,13 @@ class SystemEnv{
 
     /**
      * Load the enviroment file and store 
-     * everything in the loop.
+     * everything in a constant.
      */
 
     public static function load(){
 
         require_once ROOTPATH."/env.php";
-
-        return $a;
+        define("__ENV__", $a);
 
     }
 

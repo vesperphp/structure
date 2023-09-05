@@ -5,25 +5,75 @@
  * will be loaded trough this class.
  */
 
-
 namespace App;
 
-use App\Path\Route;
 use App\SystemEnv;
-
+use App\SystemController;
+use App\SystemCache;
+use App\Debug\Debug;
+use App\System\Provider;
+use App\Path\Route;
 
 class System{
 
-    public function spin(){
+    public function spinUp(){
+        
+        /**
+         * Initialize the system. 
+         * Fetching all settings,
+         * routes and other data.
+         */
 
+        SystemEnv::load();  // 1
+        Route::load();      // 2
+        Provider::cache();  // 3
         
-        SystemEnv::load();
-        
-        echo "we are running<br>";
+        /** 
+         * We compare the routing information
+         * with the fetched path from the GET
+         * variable.
+         */
 
-        Route::load();
+        Route::compare();
+
+    }
+
+    /**
+     * When we are done with showing the page
+     * we can remove all the caching and be
+     * done with it.
+     */
+
+    public function spinDown(){
+
+        // Debug data, show the provider stream.
+        Debug::dump(Provider::all());
+
+        /**
+         * Clear the system cache.
+         */
+
+        SystemCache::drop();
+
+    }
+
+    /**
+     * All the information that is stored
+     * in the provider stream can be pulled
+     * and the controller accessed.
+     */
+
+    public function pullController(){
+
+        /**
+         * Use the gathered info
+         * to build up the page
+         * and check for access
+         * reguirements.
+         */
         
-        
+        SystemController::paint();
+
     }
 
 }
