@@ -97,7 +97,7 @@ class ViewCompiler extends View{
          * within a variable:
          */
 
-        $source = file_get_contents(ROOTPATH.'/App/Views/'.$cached.".php");
+        $source = file_get_contents(ROOTPATH.'/App/Views/'.$cached.".html");
         
         /**
          * Search for all the extends and includes

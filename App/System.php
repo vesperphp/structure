@@ -11,6 +11,7 @@ use App\SystemEnv;
 use App\SystemController;
 use App\SystemCache;
 use App\Debug\Debug;
+use App\Front\ResourceCompile;
 use App\System\Provider;
 use App\Path\Route;
 
@@ -24,10 +25,10 @@ class System{
          * routes and other data.
          */
 
-        SystemEnv::load();  // 1
-        Route::load();      // 2
-        Provider::cache();  // 3
-        
+        SystemEnv::load();  
+        Route::load();      
+        Provider::cache();  
+        ResourceCompile::stylesheet(); 
         /** 
          * We compare the routing information
          * with the fetched path from the GET
